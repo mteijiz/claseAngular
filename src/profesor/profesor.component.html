@@ -1,7 +1,87 @@
 <h1>Componente profesor</h1>
 <p>Nombre: {{ nombre }}</p>
 <p>Edad: {{ edad }}</p>
+<!--
 <p *ngIf = "!casado"> Estado civil: Soltero</p>
 <p *ngIf = "casado"> Estado civil: Casado</p>
-<p>Trabajo: {{ trabajos }}</p>
+-->
+<ng-container *ngIf="casado; else soltero">
+    <p> Estado civil: Casado</p>
+</ng-container>
+<ng-template #soltero>
+    <p>Estado civil: Soltero</p>    
+</ng-template>
 
+
+<!--<p>Trabajo: {{ trabajos }}</p>
+<p *ngFor="let trabajos of trabajos; let i=index">{{trabajos[index]}}</p>-->
+<ul>
+    <li *ngFor="let trabajo of trabajos; let i = index"><!--let trabajo of trabajos le tenes que pasar el nombre de la variable con la que vas a recorrer y luego le pasas la colecciond de datos-->
+        {{i + 1}} {{trabajo}}<!--No hace falta el i+1 es solo para hacer un indice al principio-->
+    </li>
+</ul>
+<!-- <ul>
+    <li *ngFor="let trabajo of trabajos">
+        {{trabajo}}
+    </li>
+</ul> -->
+<ul>
+    <li>{{profesor.nombre}}</li>
+    <li>{{profesor.edad}}</li>
+    <li>{{profesor.materia}}</li>
+    <ng-container *ngIf="profesor.contratado; else elseTemplate">
+            <li>Contratado</li>
+    </ng-container>
+    <ng-template #elseTemplate>
+            <li>No contratado</li>
+    </ng-template>
+</ul>
+<h2><strong>Listado de profesores</strong></h2>
+<ul>
+    <li *ngFor="let profesor of profesorado, let x = index">
+        <strong>Profesor {{x + 1}}</strong>
+        <ul>
+                <li>{{profesor.nombre}}</li>
+                <li>{{profesor.edad}}</li>
+                <li>{{profesor.materia}}</li>
+                <ng-container *ngIf="profesor.contratado; else elseTemplate">
+                        <li>Contratado</li>
+                </ng-container>
+                <ng-template #elseTemplate>
+                        <li>No contratado</li>
+                </ng-template>
+        </ul>
+    </li>
+</ul>
+
+<h2>Switch case</h2>
+<ul [ngSwitch]="colors">
+    <li *ngSwitchCase="'red'" [ngStyle]="{'color': colors}">Rojo</li>
+    <li *ngSwitchCase="'blue'" [ngStyle]="{'color': colors}">Azul</li>
+    <li *ngSwitchCase="'green'" [ngStyle]="{'color': colors}">Verde</li>
+    <li *ngSwitchDefault [ngStyle]="{'color': black}">Negro</li>
+</ul>
+<!-- style="color: red" -->
+<h2>Profesor unico</h2>
+<ul>
+    <li>{{profesor.nombre}}</li>
+    <li>{{profesor.edad}}</li>
+    <li>{{profesor.materia}}</li>
+    <ng-container *ngIf="profesor.contratado; else elseTemplate">
+            <li>Contratado</li>
+    </ng-container>
+    <ng-template #elseTemplate>
+            <li>No contratado</li>
+    </ng-template>
+</ul>
+
+<h2>Evento click</h2>
+<button (click)='pulsarBoton()'>Cambiar de usuario</button>
+<div *ngIf="admin, else noAdmin">
+    <strong>Eres el administrador</strong>
+</div>
+<ng-template #noAdmin>
+    <div>
+        <strong>No eres el administrador</strong>
+    </div>
+</ng-template>
