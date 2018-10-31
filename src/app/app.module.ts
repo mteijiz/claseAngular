@@ -6,6 +6,7 @@ import { routing, appRoutingProviders } from './app.routing';
 import { AppComponent } from './app.component';
 import { ProfesorComponent } from '../profesor/profesor.component';
 import { FrutaComponent } from './fruta/fruta.component';
+import { HttpClientModule } from '@angular/common/http'; //para usar peticiones http
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { FrutaComponent } from './fruta/fruta.component';
   imports: [
     BrowserModule,
     FormsModule,
-    routing
+    routing,
+    HttpClientModule
   ],
   providers: [appRoutingProviders],
   bootstrap: [AppComponent]

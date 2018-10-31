@@ -1,10 +1,14 @@
 import { Component } from '@angular/core';
 import { Profesor } from './profesor';
 
+import { PeticionesService } from '../app/services/peticiones.service';
+
 @Component({
     selector: 'app-profesor',
-  templateUrl: './profesor.component.html'
+    templateUrl: './profesor.component.html',
+    providers: [PeticionesService]
 })
+
 
 export class ProfesorComponent{
     public nombre:string;
@@ -15,8 +19,11 @@ export class ProfesorComponent{
     public profesorado:Array<Profesor>;
     public colors:string;
     public admin:boolean;
+    public api_posts;
 
-    constructor(){
+    constructor(
+        private _peticionesService:PeticionesService,
+    ){
         this.nombre = 'Matias';
         this.edad = 23;
         this.casado = false;
@@ -32,6 +39,16 @@ export class ProfesorComponent{
     }
     ngOnInit(): void {
         console.log (this.profesor);
+        this._peticionesService.getPosts().subscribe(
+            res => {
+                this.api_posts = res;
+                if(!this.api_posts)
+                    console.log("Respuesta vacia de la API");
+            },
+            error => {
+                console.log(<any>error);
+            }
+        );
     }
 
     pulsarBoton(){

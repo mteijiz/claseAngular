@@ -1,3 +1,11 @@
+
+<h3>Respuesta de la api</h3>
+<ul *ngIf="api_posts">
+    <li *ngFor="let post of api_posts">
+        {{post.id}} - {{post.title}}
+    </li>
+</ul>
+<span *ngIf="!api_posts">Caragando listado...</span>
 <h1>Componente profesor</h1>
 <p>Nombre: {{ nombre }}</p>
 <p>Edad: {{ edad }}</p>

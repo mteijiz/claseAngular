@@ -1,4 +1,6 @@
-<p>For any date binding</p>
+<p>Two way data binding</p>
 <input type="text" [(ngModel)]='color_seleccionado'>
 <pre [style.border]="color_seleccionado == 'red' ? '2px solid red' : '2px solid black'">{{ color_seleccionado }}</pre>
 <p [ngStyle]="{'color': color_seleccionado}"><strong>Este texto se colorea segun el input</strong></p>
+ 
+<!-- Enlaza ambos lados, si se cambia de afuera se cambia de adentro y tiene un cambio en la pagina -->
