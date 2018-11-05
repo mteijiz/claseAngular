@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Profesor } from './profesor';
+import { Router, Params, ActivatedRoute} from '@angular/router';
 
 import { PeticionesService } from '../app/services/peticiones.service';
 
@@ -20,9 +21,12 @@ export class ProfesorComponent{
     public colors:string;
     public admin:boolean;
     public api_posts;
+    public parametro;
 
     constructor(
         private _peticionesService:PeticionesService,
+        private _route:ActivatedRoute,
+        private _router:Router
     ){
         this.nombre = 'Matias';
         this.edad = 23;
@@ -49,6 +53,10 @@ export class ProfesorComponent{
                 console.log(<any>error);
             }
         );
+        this._route.params.forEach((params: Params) => {
+            this.parametro = params['nombre'];
+        });
+        console.log(this.parametro);
     }
 
     pulsarBoton(){
